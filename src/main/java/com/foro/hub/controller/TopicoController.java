@@ -1,10 +1,9 @@
 package com.foro.hub.controller;
 
 
-import com.foro.hub.domain.*;
+import com.foro.hub.domain.topico.*;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
@@ -33,8 +32,8 @@ public class TopicoController {
     }
 
     @GetMapping
-    public ResponseEntity<List<DTODetalleTopico>> listar(@PageableDefault(size=10, sort={"titulo"}) Pageable paginacion) {
-        var page = repository.findAllByStatusTrue(paginacion).map(DTODetalleTopico::new);
+    public ResponseEntity<List<DTOListaTopico>> listar(@PageableDefault(size=10, sort={"titulo"}) Pageable paginacion) {
+        var page = repository.findAllByStatusTrue(paginacion).map(DTOListaTopico::new);
         return ResponseEntity.ok(page.getContent());
     }
 

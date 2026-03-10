@@ -1,4 +1,4 @@
-package com.foro.hub.domain;
+package com.foro.hub.domain.topico;
 
 
 import jakarta.persistence.*;
