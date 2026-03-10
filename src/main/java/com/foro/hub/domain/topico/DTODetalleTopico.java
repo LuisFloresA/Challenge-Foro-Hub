@@ -7,7 +7,7 @@ public record DTODetalleTopico(
         String titulo,
         String mensaje,
         LocalDateTime fechaCreacion,
-        String autor,
+        Long autor,
         String curso,
         Boolean status
 ) {
@@ -17,7 +17,7 @@ public record DTODetalleTopico(
                 topico.getTitulo(),
                 topico.getMensaje(),
                 topico.getFechaCreacion(),
-                topico.getAutor(),
+                topico.getAutor().getId(),
                 topico.getCurso(),
                 topico.getStatus()
         );

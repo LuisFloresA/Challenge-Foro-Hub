@@ -2,6 +2,7 @@ package com.foro.hub.controller;
 
 
 import com.foro.hub.domain.topico.*;
+import com.foro.hub.domain.usuario.UsuarioRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -20,6 +21,8 @@ public class TopicoController {
 
     @Autowired
     private TopicoRepository repository;
+    @Autowired
+    private UsuarioRepository usuarioRepository;
 
     @Transactional
     @PostMapping
@@ -29,11 +32,15 @@ public class TopicoController {
             return ResponseEntity.status(HttpStatus.CONFLICT)
                     .body("Error: Ya existe un tópico con ese mismo título y mensaje.");
         }
-        var topico = new Topico(datos);
+        var usuarioBuscado = usuarioRepository.findById(datos.idUsuario());
+
+        if (usuarioBuscado.isEmpty()) {
+            return ResponseEntity.badRequest().body("Error: No se encontró un usuario con el ID proporcionado.");
+        }
+        var usuario = usuarioBuscado.get();
+        var topico = new Topico(datos, usuario);
         repository.save(topico);
-
         var uri = uriComponentsBuilder.path("/topicos/{id}").buildAndExpand(topico.getId()).toUri();
-
         return ResponseEntity.created(uri).body(new DTODetalleTopico(topico));
     }
 

@@ -6,7 +6,8 @@ public record DTOListaTopico (
         Long id,
         String titulo,
         String mensaje,
-        LocalDateTime fechaCreacion
+        LocalDateTime fechaCreacion,
+        Long autor
 
 ) {
     public DTOListaTopico(Topico topico){
@@ -14,7 +15,8 @@ public record DTOListaTopico (
                 topico.getId(),
                 topico.getTitulo(),
                 topico.getMensaje(),
-                topico.getFechaCreacion()
+                topico.getFechaCreacion(),
+                topico.getAutor().getId()
         );
     }
 }

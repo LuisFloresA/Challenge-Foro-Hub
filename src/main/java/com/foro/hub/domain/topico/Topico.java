@@ -1,6 +1,7 @@
 package com.foro.hub.domain.topico;
 
 
+import com.foro.hub.domain.usuario.Usuario;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -25,15 +26,17 @@ public class Topico {
     private LocalDateTime fechaCreacion;
 
     private Boolean status;
-    private String autor;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "usuario_id")
+    private Usuario autor;
     private String curso;
 
-    public Topico(DTOtopico dtoTopico) {
+    public Topico(DTOtopico dtoTopico, Usuario autor) {
         this.titulo = dtoTopico.titulo();
         this.mensaje = dtoTopico.mensaje();
         this.fechaCreacion = LocalDateTime.now();
         this.status = true;
-        this.autor = dtoTopico.autor();
+        this.autor = autor;
         this.curso = dtoTopico.curso();
     }
 
