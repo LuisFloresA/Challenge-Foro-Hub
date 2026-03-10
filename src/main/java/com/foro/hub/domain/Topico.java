@@ -2,6 +2,7 @@ package com.foro.hub.domain;
 
 
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -30,5 +31,17 @@ public class Topico {
         this.status = true;
         this.autor = dtoTopico.autor();
         this.curso = dtoTopico.curso();
+    }
+
+    public void actualizarInformaciones(@Valid DTOEditarTopico datos) {
+        if (datos.titulo() != null) {
+            this.titulo = datos.titulo();
+        }
+        if (datos.mensaje() != null) {
+            this.mensaje = datos.mensaje();
+        }
+    }
+    public void eliminar() {
+        this.status = false;
     }
 }
