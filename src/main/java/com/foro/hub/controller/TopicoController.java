@@ -6,6 +6,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +24,11 @@ public class TopicoController {
     @Transactional
     @PostMapping
     public ResponseEntity registrar(@RequestBody @Valid DTOtopico datos, UriComponentsBuilder uriComponentsBuilder) {
+
+        if (repository.existsByTituloAndMensaje(datos.titulo(), datos.mensaje())) {
+            return ResponseEntity.status(HttpStatus.CONFLICT)
+                    .body("Error: Ya existe un tópico con ese mismo título y mensaje.");
+        }
         var topico = new Topico(datos);
         repository.save(topico);
 

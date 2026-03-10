@@ -1,12 +1,15 @@
 package com.foro.hub.domain.topico;
 
+import java.time.LocalDateTime;
+
 public record DTODetalleTopico(
         Long id,
         String titulo,
         String mensaje,
-        String fechaCreacion,
+        LocalDateTime fechaCreacion,
         String autor,
-        String curso
+        String curso,
+        Boolean status
 ) {
     public DTODetalleTopico(Topico topico){
         this(
@@ -15,7 +18,8 @@ public record DTODetalleTopico(
                 topico.getMensaje(),
                 topico.getFechaCreacion(),
                 topico.getAutor(),
-                topico.getCurso()
+                topico.getCurso(),
+                topico.getStatus()
         );
     }
 }
