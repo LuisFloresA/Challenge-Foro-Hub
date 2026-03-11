@@ -125,7 +125,7 @@ VALUES ('Usuario de Prueba', 'admin@foro.com', '$2a$10$Y50UaMFOxteibQEYLrwuHeehH
 
 
 ## Ejemplos:
-### Solicitud token
+- ### Solicitud token
   <img width="1115" height="282" alt="image" src="https://github.com/user-attachments/assets/469ab31f-66db-4ce3-9d16-2c6f240158d3" />
 - ### Servicio rechaza solicitud sin token:
 <img width="1115" height="246" alt="image" src="https://github.com/user-attachments/assets/ded5a1c4-e6db-4c5a-a8e2-67f31d613fcb" />
